@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class FloodFill : MonoBehaviour {
 
+    //Variable to store the width.
     private int width;
+    //Variable to store the Height.
     private int height;
 
+    //Reference to the Grid Script.
     private Grid grid;
 
     private void Start()
@@ -14,6 +17,15 @@ public class FloodFill : MonoBehaviour {
         grid = GetComponent<Grid>();
     }
 
+
+    /// <summary>
+    /// Flood Fill Uncover, use this function to uncover al the connected empty objects and stop on a object when there is a mine near the object.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="w"></param>
+    /// <param name="h"></param>
+    /// <param name="visited"></param>
     public void FFuncover(int x, int y, int w, int h, bool[,] visited )
     {
         width = w;
@@ -42,6 +54,7 @@ public class FloodFill : MonoBehaviour {
 
     public bool objectAt(int x, int y)
     {
+        // check if the object with the given x and y is a mine, if not return false.
         if (x >= 0 && y >= 0 && x < width && y < height)
             return grid.GetElements[x, y].GetIsMine;
         return false;
