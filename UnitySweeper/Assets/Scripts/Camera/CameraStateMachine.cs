@@ -49,6 +49,5 @@ public class CameraStateMachine : MonoBehaviour {
 
         currentStates = cameraStates[cameraBehaviourID];
         currentStates.Enter();
-    }
-    
+    }    
 }

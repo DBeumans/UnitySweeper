@@ -23,7 +23,7 @@ public class Element : MonoBehaviour {
         grid = FindObjectOfType<Grid>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        isMine = Random.value < 0.15;
+        isMine = Random.value < 0;
 
         int x = (int)transform.position.x;
         int y = (int)transform.position.y;

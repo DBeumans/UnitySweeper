@@ -7,8 +7,8 @@ public class Grid : MonoBehaviour {
     [SerializeField]
     private GameObject defaultElement;
 
-    private static int width = 10;
-    private static int height = 13;
+    private static int width =10;
+    private static int height =13;
 
     public int GetWidth { get { return width; } set { if (value < 5 ) return;  width = value; } }
     public int GetHeight { get { return height; } set { if (value < 5 ) return; height = value; } }
