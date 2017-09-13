@@ -7,8 +7,8 @@ public class GamePlay : GameStates
     [SerializeField]
     private GameObject defaultElement;
 
-    private int width = 10;
-    private int height = 13;
+    private int width;
+    private int height;
     
     private float mineChance;
     public float GetMineChance { get { return mineChance; } }
@@ -17,28 +17,31 @@ public class GamePlay : GameStates
     public Element[,] GetElements { get { return elements; } }
 
     private FloodFill floodFill;
-    private GameManager gameManager;
     private GenerateGrid generateGrid;
     private GameStateMachine gameStateMachine;
+    private GameOptions gameOptions;
 
     public override void Enter()
     {
+        gameOptions = FindObjectOfType<GameOptions>();
         mineChance = 0.15f;
+
+        width = gameOptions.GetWidth;
+        height = gameOptions.GetHeight;
+
         elements = new Element[width, height];
 
-        gameManager = GetComponent<GameManager>();
         generateGrid = GetComponent<GenerateGrid>();
         gameStateMachine = GetComponent<GameStateMachine>();
         floodFill = GetComponent<FloodFill>();
 
         // Generate Level
-        generateGrid.Generate(gameManager.GetWidth, gameManager.GetHeight, gameManager.GetDefaultElement);
+        generateGrid.Generate(width,height, defaultElement, "Elements", "default");
 
     }
 
     public void CheckElement(Element obj)
     {
-        // Recieving the correct element.
         if (obj.GetIsMine)
         {
             uncoverMines();

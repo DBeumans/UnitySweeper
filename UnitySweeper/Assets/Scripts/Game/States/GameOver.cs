@@ -5,9 +5,18 @@ using UnityEngine;
 public class GameOver : GameStates
 {
 
+    private UIEventListener ui_EventListener;
+
+    [SerializeField]
+    private GameObject hideUI;
+    [SerializeField]
+    private GameObject showUI;
+
     public override void Enter()
     {
-        Debug.Log("lose");
+        ui_EventListener = GetComponent<UIEventListener>();
+        ui_EventListener.UI_EventHandler(hideUI,showUI);
+
     }
 
     public override void Act()
@@ -18,15 +27,5 @@ public class GameOver : GameStates
     public override void Reason()
     {
 
-    }
-
-    private void uncoverMines()
-    {
-
-    }
-
-    private bool isFinished()
-    {
-        return true;
     }
 }

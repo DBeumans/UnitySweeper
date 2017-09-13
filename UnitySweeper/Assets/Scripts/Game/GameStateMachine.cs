@@ -8,7 +8,6 @@ public class GameStateMachine : MonoBehaviour {
     {
         finish,
         won,
-        pause,
         play
     }
 
@@ -21,7 +20,6 @@ public class GameStateMachine : MonoBehaviour {
         addState(GameAvailableStates.play, GetComponent<GamePlay>());
         addState(GameAvailableStates.finish, GetComponent<GameOver>());
         addState(GameAvailableStates.won, GetComponent<GameWon>());
-        addState(GameAvailableStates.pause, GetComponent<GamePause> ());
 
         setState(GameAvailableStates.play);
 
