@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameAvailableStates
-{
-    finish,
-    won,
-    pause,
-    play
-}
-
 public class GameStateMachine : MonoBehaviour {
+
+    public enum GameAvailableStates
+    {
+        finish,
+        won,
+        pause,
+        play
+    }
 
     private readonly Dictionary<GameAvailableStates, GameStates> gameStates = new Dictionary<GameAvailableStates, GameStates>();
 
@@ -19,9 +19,11 @@ public class GameStateMachine : MonoBehaviour {
     private void Start()
     {
         addState(GameAvailableStates.play, GetComponent<GamePlay>());
-        addState(GameAvailableStates.finish, GetComponent<GameFinish>());
+        addState(GameAvailableStates.finish, GetComponent<GameOver>());
         addState(GameAvailableStates.won, GetComponent<GameWon>());
         addState(GameAvailableStates.pause, GetComponent<GamePause> ());
+
+        setState(GameAvailableStates.play);
 
     }
 
@@ -30,7 +32,7 @@ public class GameStateMachine : MonoBehaviour {
         gameStates.Add(availableState, state);
     }
 
-    private void setState(GameAvailableStates availableStateID)
+    public void setState(GameAvailableStates availableStateID)
     {
         if (!gameStates.ContainsKey(availableStateID))
             return;

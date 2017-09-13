@@ -14,44 +14,29 @@ public class Element : MonoBehaviour {
     [SerializeField]
     private Sprite mineSprite;
 
-    private Grid grid;
-
     private SpriteRenderer spriteRenderer;
+
+
+    private GamePlay gamePlay;
 
     private void Start()
     {
-        grid = FindObjectOfType<Grid>();
+        gamePlay = FindObjectOfType<GamePlay>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        isMine = Random.value < 0;
+        isMine = Random.value < gamePlay.GetMineChance;
 
         int x = (int)transform.position.x;
         int y = (int)transform.position.y;
-        grid.GetElements[x, y] = this;
+        gamePlay.GetElements[x, y] = this;
     }
 
     private void OnMouseUpAsButton()
     {
-
-        if(isMine)
-        {
-            grid.uncoverMines();
-            Debug.Log("You Lose");
-            return;
-        }
-
-        int x = (int)transform.position.x;
-        int y = (int)transform.position.y;
-        loadSprites(grid.GetFloodFill.adjacentObject(x, y));
-
-        grid.GetFloodFill.FFuncover(x, y, grid.GetWidth , grid.GetHeight,  new bool[grid.GetWidth, grid.GetHeight]);
-
-        if (grid.isFinished())
-            print("you win");
-
-        return;
+        gamePlay.CheckElement(this);
     }
-
+    
     public void loadSprites(int adjacentCount)
     {
         if(isMine)

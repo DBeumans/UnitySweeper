@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameFinish : GameStates
+public class GameOver : GameStates
 {
 
     public override void Enter()
     {
-
-    }
-
-    public override void Leave()
-    {
-
+        Debug.Log("lose");
     }
 
     public override void Act()
@@ -30,8 +25,8 @@ public class GameFinish : GameStates
 
     }
 
-    private void isFinished()
+    private bool isFinished()
     {
-
+        return true;
     }
 }

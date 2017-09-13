@@ -7,12 +7,7 @@ public class GameWon : GameStates {
 
     public override void Enter()
     {
-        
-    }
-
-    public override void Leave()
-    {
-       
+        Debug.Log("won");   
     }
 
     public override void Act()
