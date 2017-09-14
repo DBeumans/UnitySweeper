@@ -19,17 +19,26 @@ public class UIButton : MonoBehaviour {
     [SerializeField]
     private int sceneNumber;
 
+    [SerializeField]
+    private bool quit;
+
 	private void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(delegate () { changeTarget(hidePanel, showPanel, sceneNumber); });
+        button.onClick.AddListener(delegate () { changeTarget(hidePanel, showPanel, sceneNumber, quit); });
     }
 
-    private void changeTarget(GameObject hidePanelObj, GameObject showpanelObj = null, int scene = 0)
+    private void changeTarget(GameObject hidePanelObj, GameObject showpanelObj = null, int scene = 0 , bool quitGame = false)
     {
         if(changeLevel)
         {
             changeScene(scene);
+            return;
+        }
+
+        if(quitGame)
+        {
+            quitApplication();
             return;
         }
 
@@ -42,5 +51,10 @@ public class UIButton : MonoBehaviour {
     private void changeScene(int scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    private void quitApplication()
+    {
+        Application.Quit();
     }
 }

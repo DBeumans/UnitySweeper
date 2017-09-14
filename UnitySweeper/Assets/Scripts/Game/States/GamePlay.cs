@@ -20,6 +20,7 @@ public class GamePlay : GameStates
     private GenerateGrid generateGrid;
     private GameStateMachine gameStateMachine;
     private GameOptions gameOptions;
+    private CameraStateMachine cameraStateMachine;
 
     public override void Enter()
     {
@@ -33,19 +34,23 @@ public class GamePlay : GameStates
 
         generateGrid = GetComponent<GenerateGrid>();
         gameStateMachine = GetComponent<GameStateMachine>();
+        cameraStateMachine = FindObjectOfType<CameraStateMachine>();
         floodFill = GetComponent<FloodFill>();
-
-        // Generate Level
+        
         generateGrid.Generate(width,height, defaultElement, "Elements", "default");
+        cameraStateMachine.SetState(cameraBehaviours.Follow);
 
     }
 
     public void CheckElement(Element obj)
     {
+        // Game over or Game Won.
+        if (gameStateMachine.GetCurrentState() != this)
+            return;
         if (obj.GetIsMine)
         {
             uncoverMines();
-            gameStateMachine.setState(GameStateMachine.GameAvailableStates.finish);
+            gameStateMachine.SetState(GameStateMachine.GameAvailableStates.finish);
             return;
         }
 
@@ -56,11 +61,9 @@ public class GamePlay : GameStates
         floodFill.FFuncover(x, y, width, height, new bool[width, height]);
     
         if (isFinished())
-        {
-            gameStateMachine.setState(GameStateMachine.GameAvailableStates.won);
-        }
-        return;
+            gameStateMachine.SetState(GameStateMachine.GameAvailableStates.won);
 
+        return;
     }
 
     private void uncoverMines()
@@ -72,7 +75,6 @@ public class GamePlay : GameStates
 
     private bool isFinished()
     {
-        // checks if there are still covered no-mines left.
         foreach (Element elem in elements)
             if (elem.IsCovered() && !elem.GetIsMine)
                 return false;

@@ -21,7 +21,7 @@ public class CameraStateMachine : MonoBehaviour {
         addStates(cameraBehaviours.Follow, GetComponent<CameraFollow>());
         addStates(cameraBehaviours.Idle, GetComponent<CameraIdle>());
 
-        setState(cameraBehaviours.Idle);
+        SetState(cameraBehaviours.Idle);
     }
 
     private void addStates(cameraBehaviours cameraBehaviour, CameraStates state)
@@ -38,7 +38,7 @@ public class CameraStateMachine : MonoBehaviour {
         }
     }
 
-    private void setState(cameraBehaviours cameraBehaviourID)
+    public void SetState(cameraBehaviours cameraBehaviourID)
     {
         // if the state doesn't exist in the dictionary stop
         if (!cameraStates.ContainsKey(cameraBehaviourID))

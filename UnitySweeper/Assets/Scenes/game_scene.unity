@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 651739005}
   - component: {fileID: 651739004}
   - component: {fileID: 651739003}
+  - component: {fileID: 651739006}
   m_Layer: 5
   m_Name: Main_Menu
   m_TagString: Untagged
@@ -409,6 +410,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 651739001}
+--- !u!114 &651739006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 651739001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00390761ec65f84a9dbb002a0914cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showPanel: {fileID: 0}
+  hidePanel: {fileID: 0}
+  changeLevel: 1
+  sceneNumber: 0
 --- !u!1 &726360373
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!124 &726360375
 Behaviour:
   m_ObjectHideFlags: 0
@@ -878,6 +894,7 @@ GameObject:
   - component: {fileID: 2046316890}
   - component: {fileID: 2046316889}
   - component: {fileID: 2046316888}
+  - component: {fileID: 2046316891}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -978,3 +995,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2046316886}
+--- !u!114 &2046316891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046316886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00390761ec65f84a9dbb002a0914cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showPanel: {fileID: 0}
+  hidePanel: {fileID: 0}
+  changeLevel: 1
+  sceneNumber: 1

@@ -9,7 +9,6 @@ public class CameraIdle : CameraStates {
         Debug.Log("Camera Idle");
     }
 
-
 	public override void Act()
     {
 

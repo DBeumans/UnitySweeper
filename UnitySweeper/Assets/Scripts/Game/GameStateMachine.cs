@@ -21,7 +21,7 @@ public class GameStateMachine : MonoBehaviour {
         addState(GameAvailableStates.finish, GetComponent<GameOver>());
         addState(GameAvailableStates.won, GetComponent<GameWon>());
 
-        setState(GameAvailableStates.play);
+        SetState(GameAvailableStates.play);
 
     }
 
@@ -30,7 +30,7 @@ public class GameStateMachine : MonoBehaviour {
         gameStates.Add(availableState, state);
     }
 
-    public void setState(GameAvailableStates availableStateID)
+    public void SetState(GameAvailableStates availableStateID)
     {
         if (!gameStates.ContainsKey(availableStateID))
             return;
@@ -40,6 +40,14 @@ public class GameStateMachine : MonoBehaviour {
 
         currentState = gameStates[availableStateID];
         currentState.Enter();
+    }
+
+    public GameStates GetCurrentState()
+    {
+        if (currentState != null)
+            return currentState;
+
+        return null;
     }
 
     private void Update()
