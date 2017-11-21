@@ -27,7 +27,7 @@ public class CameraFollow : CameraStates
         w = w / 2;
         h = h / 2;
 
-        cam.transform.position = new Vector3(w, h, -w + -h);
+        cam.transform.position = new Vector3(w, h, -w + -h + -10);
 
     }
 

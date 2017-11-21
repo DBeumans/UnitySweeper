@@ -6,7 +6,6 @@ public class CameraIdle : CameraStates {
 
     public override void Enter()
     {
-        Debug.Log("Camera Idle");
     }
 
 	public override void Act()

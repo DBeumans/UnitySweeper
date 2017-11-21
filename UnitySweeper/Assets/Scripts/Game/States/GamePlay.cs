@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GamePlay : GameStates
 {
@@ -22,6 +23,11 @@ public class GamePlay : GameStates
     private GameOptions gameOptions;
     private CameraStateMachine cameraStateMachine;
 
+    public delegate bool CheckElements();
+    public CheckElements CheckElementsEvent;
+
+    private bool checkGameState = false;
+
     public override void Enter()
     {
         gameOptions = FindObjectOfType<GameOptions>();
@@ -40,6 +46,8 @@ public class GamePlay : GameStates
         generateGrid.Generate(width,height, defaultElement, "Elements", "default");
         cameraStateMachine.SetState(cameraBehaviours.Follow);
 
+        CheckElementsEvent += this.isFinished;
+
     }
 
     public void CheckElement(Element obj)
@@ -54,15 +62,16 @@ public class GamePlay : GameStates
             return;
         }
 
+
         int x = (int)obj.transform.position.x;
         int y = (int)obj.transform.position.y;
         obj.loadSprites(floodFill.adjacentObject(x, y));
 
         floodFill.FFuncover(x, y, width, height, new bool[width, height]);
-    
+
         if (isFinished())
             gameStateMachine.SetState(GameStateMachine.GameAvailableStates.won);
-
+        checkGameState = true;
         return;
     }
 
@@ -75,14 +84,29 @@ public class GamePlay : GameStates
 
     private bool isFinished()
     {
-        foreach (Element elem in elements)
-            if (elem.IsCovered() && !elem.GetIsMine)
-                return false;
-        return true;
+        foreach(Element elem in elements)
+        {
+            if(elem.IsFlagged())
+            {
+                if(elem.GetIsMine)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+    private void FixedUpdate()
+    {
+        if(checkGameState)
+            if (isFinished())
+                gameStateMachine.SetState(GameStateMachine.GameAvailableStates.won);
     }
 
     public override void Act()
     {
+        
 
     }
 
